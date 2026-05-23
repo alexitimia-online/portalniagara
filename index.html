@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Guardián · Carlos Martínez · Peña de Bernal</title>
+  <meta name="description" content="Carlos Martínez, El Guardián de la Peña de Bernal. Activador de Portales · Sanador de Almas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230d1a0b'/%3E%3Cpolygon points='50,8 92,82 8,82' fill='none' stroke='%23c9a84c' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='60' r='29' fill='none' stroke='%23b400dc' stroke-width='.8' opacity='.5'/%3E%3Ccircle cx='50' cy='60' r='24' fill='none' stroke='%234b0082' stroke-width='.8' opacity='.55'/%3E%3Ccircle cx='50' cy='60' r='19' fill='none' stroke='%231e50dc' stroke-width='.8' opacity='.5'/%3E%3Ccircle cx='50' cy='60' r='14' fill='none' stroke='%2322a040' stroke-width='.8' opacity='.6'/%3E%3Ccircle cx='50' cy='60' r='10' fill='none' stroke='%23c9a84c' stroke-width='.8' opacity='.8'/%3E%3Ccircle cx='50' cy='60' r='6' fill='none' stroke='%23dc6e14' stroke-width='.8' opacity='.7'/%3E%3Ccircle cx='50' cy='60' r='3' fill='none' stroke='%23c81e1e' stroke-width='.8' opacity='.6'/%3E%3Cpath d='M50,54 L52,59 L50,64 L48,59 Z M44,60 L49,58 L54,60 L49,62 Z' fill='%23c9a84c'/%3E%3C/svg%3E" />
+
+  <style>
+    :root {
+      --c-bg:        #0d1a0b;
+      --c-surface:   #111e0e;
+      --c-stone:     #1d2e18;
+      --c-gold:      #c9a84c;
+      --c-gold-dim:  #7a6a30;
+      --c-cream:     #e8ddc8;
+      --c-mist:      #8fa882;
+      --c-text:      #ccd8bb;
+      --c-accent:    #b5873a;
+      --nav-h:       72px;
+      --max-w:       1100px;
+      --ease:        cubic-bezier(.25,.46,.45,.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--c-bg);
+      color: var(--c-text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 3.5rem);
+      background: linear-gradient(to bottom, rgba(13,26,11,.95) 0%, transparent 100%);
+      transition: background .4s var(--ease);
+    }
+    nav.scrolled {
+      background: rgba(13,26,11,.97);
+      border-bottom: 1px solid rgba(201,168,76,.12);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .8rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--c-gold); text-decoration: none; line-height: 1.3;
+    }
+    .nav-logo span { display: block; font-weight: 300; color: var(--c-mist); font-size: .65rem; letter-spacing: .25em; }
+
+    .nav-links {
+      display: flex; gap: 2.5rem; list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--c-mist); text-decoration: none;
+      transition: color .3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
+      background: var(--c-gold); transform: scaleX(0); transition: transform .3s var(--ease);
+    }
+    .nav-links a:hover { color: var(--c-cream); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-lang {
+      font-size: .65rem; letter-spacing: .2em;
+      background: none; border: 1px solid var(--c-gold-dim);
+      color: var(--c-gold); cursor: pointer; padding: .35rem .9rem;
+      transition: all .3s; font-family: 'Jost', sans-serif;
+    }
+    .nav-lang:hover { background: var(--c-gold); color: var(--c-bg); }
+
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: .5rem; }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 1px;
+      background: var(--c-mist); margin: 5px 0; transition: all .3s;
+    }
+
+    /* ── HERO ────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: calc(var(--nav-h) + 5rem) clamp(2rem, 8vw, 6rem) 6rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-text { position: relative; z-index: 2; max-width: min(640px, 100%); }
+    .hero-image { display: none; }
+    .hero-emblem { display: none; }
+    /* Ghost watermark SVG */
+    .hero-watermark {
+      position: absolute; right: -4%; top: 50%;
+      transform: translateY(-50%);
+      width: clamp(380px, 55vw, 680px); height: auto;
+      opacity: .045; pointer-events: none; z-index: 1;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      padding: 2rem clamp(1.5rem, 6vw, 4rem);
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,.05);
+      font-size: .6rem; letter-spacing: .15em; color: rgba(201,168,76,.3);
+    }
+
+    .hero-eyebrow {
+      font-size: .7rem; letter-spacing: .35em; text-transform: uppercase;
+      color: var(--c-gold); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hero-eyebrow::before { content: ''; width: 2rem; height: 1px; background: var(--c-gold); }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 300; line-height: 1.04;
+      color: var(--c-cream); margin-bottom: 1.2rem;
+    }
+    .hero-title em { font-style: italic; color: var(--c-gold); }
+
+    .hero-subtitle {
+      font-size: .75rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--c-mist); margin-bottom: 2rem;
+    }
+
+    .hero-phrase {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      color: var(--c-text); line-height: 1.6;
+      padding-left: 1.5rem;
+      border-left: 1px solid var(--c-gold-dim);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      padding: .85rem 2rem; font-size: .72rem; letter-spacing: .2em;
+      text-transform: uppercase; text-decoration: none;
+      background: var(--c-gold); color: var(--c-bg);
+      transition: all .3s var(--ease); font-family: 'Jost', sans-serif;
+      font-weight: 400;
+    }
+    .btn-primary:hover { background: var(--c-cream); }
+
+    .btn-ghost {
+      padding: .85rem 2rem; font-size: .72rem; letter-spacing: .2em;
+      text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--c-gold-dim); color: var(--c-gold);
+      transition: all .3s var(--ease); font-family: 'Jost', sans-serif;
+    }
+    .btn-ghost:hover { border-color: var(--c-gold); background: rgba(201,168,76,.08); }
+
+    .scroll-cue {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .6rem;
+      font-size: .6rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--c-gold-dim); text-decoration: none; z-index: 3;
+      animation: float 2.5s ease-in-out infinite;
+    }
+    .scroll-cue::after {
+      content: ''; width: 1px; height: 2rem;
+      background: linear-gradient(to bottom, var(--c-gold-dim), transparent);
+    }
+    @keyframes float { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ── QUOTE BAR ───────────────────────────────────── */
+    .quote-bar {
+      background: var(--c-surface);
+      border-top: 1px solid rgba(201,168,76,.12);
+      border-bottom: 1px solid rgba(201,168,76,.12);
+      padding: 3rem clamp(1.5rem, 8vw, 8rem);
+    }
+    .quote-bar blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--c-cream); line-height: 1.6;
+      text-align: center; max-width: 700px; margin: 0 auto;
+    }
+    .quote-bar cite {
+      display: block; margin-top: 1rem;
+      font-style: normal; font-size: .65rem; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--c-gold-dim);
+      font-family: 'Jost', sans-serif;
+    }
+
+    /* ── SECTIONS ────────────────────────────────────── */
+    section {
+      padding: 6rem clamp(1.5rem, 6vw, 4rem);
+      max-width: var(--max-w); margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: .65rem; letter-spacing: .35em; text-transform: uppercase;
+      color: var(--c-gold); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-label::before { content: ''; width: 1.5rem; height: 1px; background: var(--c-gold); }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 300; color: var(--c-cream); line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--c-gold); }
+
+    .section-body {
+      font-size: 1rem; line-height: 1.8; color: var(--c-text);
+      max-width: 600px;
+    }
+    .section-body p + p { margin-top: 1.2em; }
+
+    /* ── QUIEN full-bleed ────────────────────────────── */
+    #quien {
+      max-width: 100%; padding: 0;
+      border-top: 1px solid rgba(201,168,76,.08);
+      border-bottom: 1px solid rgba(201,168,76,.08);
+    }
+    .quien-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+    .quien-img { position: relative; overflow: hidden; }
+    .quien-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center; display: block;
+    }
+    .quien-img::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to right, transparent 55%, var(--c-bg) 100%);
+    }
+    .quien-text {
+      padding: 5rem clamp(2rem, 5vw, 4rem) 5rem clamp(1.5rem, 3vw, 2.5rem);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .quien-quote-card {
+      margin-top: 2rem;
+      padding: 1.8rem 2rem;
+      border: 1px solid rgba(201,168,76,.15);
+      background: var(--c-surface);
+    }
+
+    /* ── ACTIVADOR full-bleed ─────────────────────────── */
+    #activador {
+      max-width: 100%; padding: 0;
+      background: var(--c-surface);
+      border-top: 1px solid rgba(201,168,76,.08);
+    }
+    .activador-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+    .activador-img { position: relative; overflow: hidden; }
+    .activador-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center; display: block;
+    }
+    .activador-img::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to right, transparent 55%, var(--c-surface) 100%);
+    }
+    .activador-text {
+      padding: 5rem clamp(2rem, 5vw, 4rem) 5rem clamp(1.5rem, 3vw, 2.5rem);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .activador-svg-icon {
+      width: 72px; height: auto; margin-bottom: 1.5rem; opacity: .75;
+    }
+    #craneos {
+      position: relative; overflow: hidden;
+      background: var(--c-surface); max-width: 100%;
+      border-top: 1px solid rgba(201,168,76,.08);
+      border-bottom: 1px solid rgba(201,168,76,.08);
+    }
+    #craneos .craneos-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+    /* Left: full-bleed image */
+    #craneos .craneos-img {
+      position: relative; overflow: hidden;
+    }
+    #craneos .craneos-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center center;
+      display: block;
+    }
+    /* Fade right edge into surface bg */
+    #craneos .craneos-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 50%, var(--c-surface) 100%);
+      pointer-events: none;
+    }
+    /* Right: text panel */
+    #craneos .craneos-text {
+      padding: 5rem clamp(2rem, 5vw, 4rem) 5rem clamp(1rem, 3vw, 2rem);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    /* ── EXPERIENCIA ─────────────────────────────────── */
+    #experiencia { text-align: center; }
+    #experiencia .section-label { justify-content: center; }
+    #experiencia .section-label::before { display: none; }
+    #experiencia .section-title { margin: 0 auto 1.5rem; }
+    #experiencia .section-body { margin: 0 auto; }
+
+    .exp-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 4rem;
+    }
+    .exp-card {
+      background: var(--c-surface);
+      padding: 2.5rem 2rem; text-align: left;
+      border: 1px solid rgba(201,168,76,.07);
+      transition: border-color .3s;
+    }
+    .exp-card:hover { border-color: rgba(201,168,76,.25); }
+    .exp-card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; color: rgba(201,168,76,.2); line-height: 1;
+      margin-bottom: .75rem;
+    }
+    .exp-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; color: var(--c-cream);
+      margin-bottom: .75rem;
+    }
+    .exp-card p { font-size: .9rem; color: var(--c-mist); line-height: 1.7; }
+
+    /* ── ACTIVADOR ───────────────────────────────────── */
+    #activador .inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .activador-visual {
+      position: relative; display: flex; justify-content: center;
+      align-items: center; padding: 2rem;
+    }
+    .activador-svg {
+      width: min(340px, 90%); height: auto;
+      filter: drop-shadow(0 0 18px rgba(201,168,76,.07));
+    }
+
+    /* ── CTA ─────────────────────────────────────────── */
+    #cta {
+      background: var(--c-surface);
+      max-width: 100%;
+      border-top: 1px solid rgba(201,168,76,.12);
+      border-bottom: 1px solid rgba(201,168,76,.12);
+    }
+    #cta .inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 6rem clamp(1.5rem, 6vw, 4rem);
+      text-align: center;
+    }
+    #cta .section-label { justify-content: center; }
+    #cta .section-label::before { display: none; }
+    #cta .section-title { margin: 0 auto 1rem; }
+    #cta .section-body { margin: 0 auto 2.5rem; }
+    #cta .ctas { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      padding: 2.5rem clamp(1.5rem, 6vw, 4rem);
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,.06);
+      font-size: .65rem; letter-spacing: .15em; color: var(--c-gold-dim);
+    }
+
+    /* ── FADE-IN ANIMATION ───────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .8s var(--ease), transform .8s var(--ease);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 820px) {
+      #hero { padding: calc(var(--nav-h) + 3rem) clamp(1.5rem, 6vw, 3rem) 5rem; }
+      .quien-layout,
+      .activador-layout,
+      #craneos .craneos-layout { grid-template-columns: 1fr; }
+      .quien-img, .activador-img { min-height: 55vw; }
+      .quien-img::after {
+        background: linear-gradient(to bottom, transparent 55%, var(--c-bg) 100%);
+      }
+      .activador-img::after {
+        background: linear-gradient(to bottom, transparent 55%, var(--c-surface) 100%);
+      }
+      #craneos .craneos-img { min-height: 55vw; }
+      #craneos .craneos-img::after {
+        background: linear-gradient(to bottom, transparent 50%, var(--c-surface) 100%);
+      }
+      .exp-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+    }
+    /* ── NEWSLETTER BANNER ───────────────────────────── */
+    .newsletter-banner {
+      background: var(--c-stone);
+      border-top: 1px solid rgba(201,168,76,.15);
+      border-bottom: 1px solid rgba(201,168,76,.15);
+      padding: 4rem clamp(1.5rem, 6vw, 4rem);
+    }
+    .newsletter-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
+    }
+    .newsletter-text .section-label { margin-bottom: .75rem; }
+    .newsletter-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300; color: var(--c-cream); line-height: 1.2;
+      margin-bottom: .75rem;
+    }
+    .newsletter-title em { font-style: italic; color: var(--c-gold); }
+    .newsletter-sub {
+      font-size: .85rem; color: var(--c-mist); line-height: 1.7;
+    }
+    .newsletter-form { display: flex; flex-direction: column; gap: .85rem; }
+    .newsletter-fields { display: flex; flex-direction: column; gap: .75rem; }
+    .newsletter-fields-row { display: flex; gap: .75rem; }
+    @media (max-width: 520px) { .newsletter-fields-row { flex-direction: column; } }
+    .newsletter-input {
+      flex: 1; padding: .85rem 1.2rem;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(201,168,76,.2);
+      color: var(--c-cream); font-family: 'Jost', sans-serif;
+      font-size: .85rem; font-weight: 300;
+      outline: none; transition: border-color .3s;
+    }
+    .newsletter-input::placeholder { color: var(--c-mist); opacity: .6; }
+    .newsletter-input:focus { border-color: rgba(201,168,76,.5); }
+    .newsletter-submit {
+      padding: .85rem 1.8rem;
+      background: var(--c-gold); color: var(--c-bg);
+      border: none; cursor: pointer;
+      font-family: 'Jost', sans-serif; font-size: .72rem;
+      font-weight: 400; letter-spacing: .2em; text-transform: uppercase;
+      transition: background .3s; white-space: nowrap;
+    }
+    .newsletter-submit:hover { background: var(--c-cream); }
+    .newsletter-legal {
+      font-size: .68rem; color: var(--c-mist); opacity: .6; line-height: 1.6;
+    }
+    .newsletter-legal a { color: var(--c-gold-dim); }
+    .newsletter-success {
+      display: none; text-align: center; padding: 1rem;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.1rem; color: var(--c-gold);
+    }
+    @media (max-width: 820px) {
+      .newsletter-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .newsletter-fields { flex-direction: column; }
+    }
+
+    /* ── EVENTOS GRID ───────────────────────────────────── */
+    #eventos { background: var(--c-bg); padding: 6rem clamp(1.5rem,6vw,4rem); }
+    .eventos-inner { max-width: var(--max-w); margin: 0 auto; }
+    .eventos-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1.5rem; margin-top: 3.5rem;
+    }
+    .evento-card {
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      min-height: 420px; border: 1px solid rgba(201,168,76,.12);
+      transition: border-color .3s, transform .3s;
+    }
+    .evento-card:hover { border-color: rgba(201,168,76,.35); transform: translateY(-3px); }
+    .ev-card-bg { position: absolute; inset: 0; z-index: 0; }
+    .ev-card-bg img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+      transition: transform .6s var(--ease);
+    }
+    .evento-card:hover .ev-card-bg img { transform: scale(1.04); }
+    .ev-card-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,26,11,.97) 30%, rgba(13,26,11,.55) 70%, rgba(13,26,11,.3) 100%);
+    }
+    .ev-card-body {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      height: 100%; padding: 1.6rem;
+    }
+    .ev-card-badge {
+      display: inline-flex; align-self: flex-start;
+      font-size: .55rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--c-bg); background: var(--c-gold);
+      padding: .25rem .75rem; margin-bottom: auto;
+    }
+    .ev-card-fecha {
+      font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--c-gold); margin-bottom: .4rem; margin-top: 1.5rem;
+    }
+    .ev-card-nombre {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+      font-weight: 300; color: var(--c-cream); line-height: 1.2; margin-bottom: .4rem;
+    }
+    .ev-card-nombre em { font-style: italic; color: var(--c-gold); }
+    .ev-card-lugar { font-size: .72rem; color: var(--c-mist); margin-bottom: 1rem; line-height: 1.4; }
+    .ev-card-lugar strong { color: var(--c-text); font-weight: 400; }
+    .ev-card-countdown {
+      display: flex; align-items: baseline; gap: .35rem;
+      padding: .55rem 0; border-top: 1px solid rgba(201,168,76,.15); margin-bottom: .9rem;
+    }
+    .ev-card-faltan { font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; color: var(--c-mist); }
+    .ev-card-days { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; color: var(--c-gold); line-height: 1; }
+    .ev-card-dias { font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; color: var(--c-mist); }
+    .ev-card-contactos { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .ev-card-contacto {
+      font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--c-mist); text-decoration: none;
+      border: 1px solid rgba(201,168,76,.2); padding: .22rem .6rem;
+      transition: all .3s; background: rgba(13,26,11,.5);
+    }
+    .ev-card-contacto:hover { border-color: var(--c-gold); color: var(--c-gold); }
+    @media (max-width: 900px) { .eventos-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 560px) { .eventos-grid { grid-template-columns: 1fr; } }
+    .test-video-slide { display: none; }
+    .test-video-slide.active { display: block; }
+    .test-video-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(201,168,76,.25); border: none; cursor: pointer; padding: 0;
+      transition: all .3s;
+    }
+    .test-video-dot.active { background: var(--c-gold); width: 20px; border-radius: 3px; }
+    /* ── Text testimonials side ── */
+    .test-quotes { position: relative; }
+    .test-quote-track { position: relative; min-height: 320px; }
+    .test-quote-slide {
+      position: absolute; inset: 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity .6s var(--ease);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .test-quote-slide.active { opacity: 1; pointer-events: auto; position: relative; }
+    .test-stars {
+      color: var(--c-gold); letter-spacing: .15em;
+      font-size: .75rem; margin-bottom: 1.5rem;
+    }
+    .test-quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      font-style: italic; color: var(--c-cream);
+      line-height: 1.65; margin-bottom: 2rem;
+    }
+    .test-quote-text::before { content: '\201C'; color: var(--c-gold); }
+    .test-quote-text::after  { content: '\201D'; color: var(--c-gold); }
+    .test-author {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .test-author-line {
+      width: 2rem; height: 1px; background: var(--c-gold-dim);
+    }
+    .test-author-info {}
+    .test-author-name {
+      font-size: .75rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--c-cream);
+    }
+    .test-author-city {
+      font-size: .65rem; letter-spacing: .1em;
+      color: var(--c-mist); margin-top: .2rem;
+    }
+    .test-quote-nav {
+      display: flex; align-items: center; gap: 1rem; margin-top: 2.5rem;
+    }
+    .test-arrow {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(201,168,76,.25); background: none;
+      color: var(--c-gold); cursor: pointer; font-size: .9rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .3s;
+    }
+    .test-arrow:hover { background: var(--c-gold); color: var(--c-bg); }
+    .test-quote-dots { display: flex; gap: .5rem; }
+    .test-quote-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(201,168,76,.25); border: none; cursor: pointer; padding: 0;
+      transition: all .3s;
+    }
+    .test-quote-dot.active { background: var(--c-gold); width: 20px; border-radius: 3px; }
+    @media (max-width: 820px) {
+      .evento-slide { grid-template-columns: 1fr; min-height: auto; }
+      .ev-img { min-height: 55vw; }
+      .ev-img::after { background: linear-gradient(to bottom, transparent 50%, var(--c-bg) 100%); }
+      .ev-info { padding: 2rem clamp(1.5rem,6vw,3rem) 3rem; }
+    }
+
+    /* ── TESTIMONIOS ─────────────────────────────────── */
+    #testimonios {
+      background: var(--c-surface);
+      border-top: 1px solid rgba(201,168,76,.1);
+      padding: 6rem 0;
+    }
+    .testimonios-header {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 clamp(1.5rem,6vw,4rem) 3rem;
+    }
+    .testimonios-body {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 clamp(1.5rem,6vw,4rem);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    /* Video side */
+    .test-videos { position: relative; }
+    .test-video-slide { display: none; }
+    .test-video-slide.active { display: block; }
+    .test-video-placeholder {
+      aspect-ratio: 9/16; max-height: 540px;
+      background: var(--c-stone); border: 1px solid rgba(201,168,76,.12);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; position: relative; overflow: hidden; cursor: pointer;
+    }
+    .test-video-placeholder iframe { width: 100%; height: 100%; position: absolute; inset: 0; border: none; }
+    .video-brand-overlay {
+      position: absolute; bottom: 0; right: 0; z-index: 2;
+      pointer-events: none;
+      background: var(--c-surface);
+      padding: .8rem .65rem .8rem .5rem;
+      display: flex; align-items: center; gap: .45rem;
+      border-top-left-radius: 2px;
+    }
+    .video-brand-overlay svg { width: 22px; height: 22px; flex-shrink: 0; }
+    .video-brand-overlay span {
+      font-family: 'Jost', sans-serif;
+      font-size: .52rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--c-gold); white-space: nowrap; line-height: 1.3;
+    }
+    .test-video-placeholder .play-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 1px solid rgba(201,168,76,.4);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-gold); font-size: 1.2rem; background: rgba(13,26,11,.6);
+    }
+    .test-video-placeholder .video-label {
+      font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--c-mist); text-align: center; padding: 0 1rem;
+    }
+    .test-video-nav {
+      display: flex; align-items: center; justify-content: center;
+      gap: .75rem; margin-top: 1.25rem;
+    }
+    .test-video-dots { display: flex; gap: .5rem; align-items: center; }
+    .test-video-arrow {
+      width: 34px; height: 34px;
+      border: 1px solid rgba(201,168,76,.25); background: none;
+      color: var(--c-gold); cursor: pointer; font-size: .85rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .3s; flex-shrink: 0;
+    }
+    .test-video-arrow:hover { background: var(--c-gold); color: var(--c-bg); }
+    .test-video-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(201,168,76,.25); border: none; cursor: pointer; padding: 0; transition: all .3s;
+    }
+    .test-video-dot.active { background: var(--c-gold); width: 20px; border-radius: 3px; }
+    /* Quote side */
+    .test-quotes { position: relative; }
+    .test-quote-track { position: relative; min-height: 320px; }
+    .test-quote-slide {
+      position: absolute; inset: 0; opacity: 0; pointer-events: none;
+      transition: opacity .6s var(--ease);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .test-quote-slide.active { opacity: 1; pointer-events: auto; position: relative; }
+    .test-stars { color: var(--c-gold); letter-spacing: .15em; font-size: .75rem; margin-bottom: 1.5rem; }
+    .test-quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      font-style: italic; color: var(--c-cream); line-height: 1.65; margin-bottom: 2rem;
+    }
+    .test-quote-text::before { content: '\201C'; color: var(--c-gold); }
+    .test-quote-text::after  { content: '\201D'; color: var(--c-gold); }
+    .test-author { display: flex; align-items: center; gap: 1rem; }
+    .test-author-line { width: 2rem; height: 1px; background: var(--c-gold-dim); }
+    .test-author-name { font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; color: var(--c-cream); }
+    .test-author-city { font-size: .65rem; letter-spacing: .1em; color: var(--c-mist); margin-top: .2rem; }
+    .test-quote-nav { display: flex; align-items: center; gap: 1rem; margin-top: 2.5rem; }
+    .test-arrow {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(201,168,76,.25); background: none;
+      color: var(--c-gold); cursor: pointer; font-size: .9rem;
+      display: flex; align-items: center; justify-content: center; transition: all .3s;
+    }
+    .test-arrow:hover { background: var(--c-gold); color: var(--c-bg); }
+    .test-quote-dots { display: flex; gap: .5rem; }
+    .test-quote-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(201,168,76,.25); border: none; cursor: pointer; padding: 0; transition: all .3s;
+    }
+    .test-quote-dot.active { background: var(--c-gold); width: 20px; border-radius: 3px; }
+    @media (max-width: 820px) {
+      .testimonios-body { grid-template-columns: 1fr; }
+      .test-video-placeholder { max-height: 400px; }
+    }
+
+    /* ── POPUP BANNER ────────────────────────────────── */
+    .popup-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(13,26,11,.8); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity .4s var(--ease);
+    }
+    .popup-overlay.visible { opacity: 1; pointer-events: auto; }
+    .popup-box {
+      background: var(--c-surface);
+      border: 1px solid rgba(201,168,76,.3);
+      max-width: 720px; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      position: relative; overflow: hidden;
+      transform: translateY(20px);
+      transition: transform .4s var(--ease);
+    }
+    .popup-overlay.visible .popup-box { transform: translateY(0); }
+    .popup-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; z-index: 2;
+      background: linear-gradient(to right, var(--c-gold-dim), var(--c-gold), var(--c-gold-dim));
+    }
+    /* Image panel */
+    .popup-img { position: relative; overflow: hidden; min-height: 380px; }
+    .popup-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .popup-img::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to right, transparent 55%, var(--c-surface) 100%);
+    }
+    /* Content panel */
+    .popup-body { padding: 2rem 2rem 1.8rem; display: flex; flex-direction: column; justify-content: center; }
+    .popup-label {
+      font-size: .6rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--c-gold); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .popup-label::before { content: '✦'; font-size: .5rem; }
+    .popup-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.35rem, 3vw, 1.85rem);
+      font-weight: 300; color: var(--c-cream); line-height: 1.2; margin-bottom: .5rem;
+    }
+    .popup-title em { font-style: italic; color: var(--c-gold); }
+    .popup-where { font-size: .75rem; color: var(--c-mist); margin-bottom: 1.3rem; line-height: 1.6; }
+    .popup-where strong { color: var(--c-text); font-weight: 400; }
+    .popup-countdown {
+      display: flex; align-items: baseline; gap: .5rem;
+      padding: .7rem 0; margin-bottom: 1.3rem;
+      border-top: 1px solid rgba(201,168,76,.12);
+      border-bottom: 1px solid rgba(201,168,76,.12);
+    }
+    .popup-faltan { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--c-mist); }
+    .popup-days { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: var(--c-gold); line-height: 1; }
+    .popup-dias { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--c-mist); }
+    .popup-actions { display: flex; flex-direction: column; gap: .65rem; }
+    .popup-wa {
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      padding: .8rem 1.2rem; background: var(--c-gold); color: var(--c-bg);
+      text-decoration: none; font-family: 'Jost', sans-serif;
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      font-weight: 400; transition: background .3s;
+    }
+    .popup-wa:hover { background: var(--c-cream); }
+    .popup-all {
+      display: block; text-align: center;
+      font-size: .62rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--c-gold-dim); text-decoration: none; padding: .4rem; transition: color .3s;
+    }
+    .popup-all:hover { color: var(--c-gold); }
+    .popup-close {
+      position: absolute; top: .6rem; right: .75rem; z-index: 3;
+      background: none; border: none; color: var(--c-mist);
+      cursor: pointer; font-size: 1.1rem; line-height: 1;
+      padding: .25rem .4rem; transition: color .3s;
+    }
+    .popup-close:hover { color: var(--c-gold); }
+    @media (max-width: 600px) {
+      .popup-box { grid-template-columns: 1fr; }
+      .popup-img { min-height: 45vw; }
+      .popup-img::after { background: linear-gradient(to bottom, transparent 50%, var(--c-surface) 100%); }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ── POPUP BANNER ──────────────────────────────────────── -->
+<div class="popup-overlay" id="popupOverlay" role="dialog" aria-modal="true">
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose" aria-label="Cerrar">✕</button>
+    <div class="popup-img">
+      <img src="https://raw.githubusercontent.com/alexitimia-online/guardian/98afad7d5b7a7b2134669f8441224cc2608d0eef/chilar-260529-31-AleFeregrino_Pt1.jpeg"
+           alt="Retiro El Chilar Tolimán" loading="eager"/>
+    </div>
+    <div class="popup-body">
+      <p class="popup-label" data-i18n="popup_label">Próxima Activación</p>
+      <h2 class="popup-title"><em>Retiro:</em> Vida,<br>Transformación Consciente</h2>
+      <p class="popup-where">
+        <strong>El Chilar, Tolimán · Querétaro</strong><br>
+        29, 30 y 31 de Mayo · 2026<br>
+        Crystal Arcoíris - Foco Tonal · Cupo limitado
+      </p>
+      <div class="popup-countdown">
+        <span class="popup-faltan" data-i18n="ev_faltan">Faltan</span>
+        <span class="popup-days" id="popupDays">—</span>
+        <span class="popup-dias" data-i18n="ev_dias">días</span>
+      </div>
+      <div class="popup-actions">
+        <a href="https://wa.me/524421783700?text=Hola%2C%20vi%20el%20Retiro%20%22Vida%2C%20Transformaci%C3%B3n%20Consciente%20%2F%20El%20Chilar%2C%20Tolim%C3%A1n%22%20en%20el%20Portal%20del%20Guardi%C3%A1n%20y%20quiero%20recibir%20informes."
+           class="popup-wa" target="_blank" rel="noopener">
+          💬 <span data-i18n="popup_wa">Escribir a Guardiana Ale Feregrino</span>
+        </a>
+        <a href="#eventos" class="popup-all" id="popupVerEventos" data-i18n="popup_all">
+          Ver todos los eventos disponibles →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── NAV ─────────────────────────────────────────────── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">EL GUARDIÁN <span>Peña de Bernal</span></a>
+  <ul class="nav-links">
+    <li><a href="#quien" data-i18n="nav_quien">Carlos Martínez</a></li>
+    <li><a href="#craneos" data-i18n="nav_craneos">Cráneos Sagrados</a></li>
+    <li><a href="#experiencia" data-i18n="nav_experiencia">La Experiencia</a></li>
+    <li><a href="#activador" data-i18n="nav_activador">Activador de Portales</a></li>
+    <li><a href="#eventos" data-i18n="nav_eventos">Eventos</a></li>
+    <li><a href="#testimonios" data-i18n="nav_testimonios">Testimonios</a></li>
+  </ul>
+  <button class="nav-lang" id="langBtn">EN</button>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section id="hero">
+  <!-- Ghost watermark -->
+  <svg class="hero-watermark" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <polygon points="120,14 222,196 18,196" fill="none" stroke="rgba(201,168,76,1)" stroke-width="1.2"/>
+    <polygon points="120,44 200,184 40,184" fill="none" stroke="rgba(201,168,76,1)" stroke-width="0.8"/>
+    <circle cx="120" cy="146" r="72" fill="none" stroke="rgba(148,0,211,1)"  stroke-width="1"/>
+    <circle cx="120" cy="146" r="60" fill="none" stroke="rgba(75,0,160,1)"   stroke-width="1"/>
+    <circle cx="120" cy="146" r="49" fill="none" stroke="rgba(30,90,220,1)"  stroke-width="1"/>
+    <circle cx="120" cy="146" r="38" fill="none" stroke="rgba(30,160,70,1)"  stroke-width="1"/>
+    <circle cx="120" cy="146" r="28" fill="none" stroke="rgba(201,168,76,1)" stroke-width="1.2"/>
+    <circle cx="120" cy="146" r="18" fill="none" stroke="rgba(220,110,20,1)" stroke-width="1"/>
+    <circle cx="120" cy="146" r="9"  fill="none" stroke="rgba(200,30,30,1)"  stroke-width="1"/>
+    <path d="M120,136 L123.5,145 L120,154 L116.5,145 Z M110,146 L119,142.5 L128,146 L119,149.5 Z" fill="rgba(201,168,76,1)"/>
+    <circle cx="120" cy="146" r="1.5" fill="rgba(201,168,76,1)"/>
+  </svg>
+  <div class="hero-text">
+    <p class="hero-eyebrow" data-i18n="hero_eyebrow">Guardián de Peña de Bernal</p>
+    <h1 class="hero-title">Carlos Martínez<br><em>El Guardián</em></h1>
+    <p class="hero-subtitle" data-i18n="hero_role">Activador de Portales · Sanador de Almas</p>
+    <p class="hero-phrase" data-i18n="hero_phrase">
+      <em>No viene a cambiarte...</em><br>
+      viene a activar lo que en ti<br>
+      ya está listo para despertar.
+    </p>
+    <div class="hero-ctas">
+      <a href="#cta" class="btn-primary" data-i18n="cta_vivir">Vivir la Experiencia</a>
+      <a href="#quien" class="btn-ghost" data-i18n="cta_conocer">Conocer al Guardián</a>
+    </div>
+  </div>
+  <a href="#quien" class="scroll-cue" aria-label="Descender" data-i18n="scroll_cue">Descender</a>
+</section>
+
+<!-- ── QUOTE BAR ─────────────────────────────────────────── -->
+<div class="quote-bar">
+  <blockquote data-i18n="quote_main">
+    "Un guía en el camino de regreso.
+    <em>Acompaña a personas que sienten que es momento de hacer una pausa, escuchar su interior y reconectar con lo esencial.</em>"
+    <cite>Carlos Martínez · El Guardián · Peña de Bernal</cite>
+  </blockquote>
+</div>
+
+<!-- ── CARLOS ─────────────────────────────────────────────── -->
+<div id="quien">
+  <div class="quien-layout">
+    <div class="quien-img fade-up">
+      <img
+        src="https://raw.githubusercontent.com/alexitimia-online/guardian/fb779f12db78625239a898bef9737a4b17b474f3/bernal_guardian.png"
+        alt="Carlos Martínez El Guardián meditando en la Peña de Bernal"
+        loading="lazy"
+      />
+    </div>
+    <div class="quien-text fade-up" style="transition-delay:.15s">
+      <p class="section-label" data-i18n="quien_label">El Guardián</p>
+      <h2 class="section-title" data-i18n="quien_title">¿Quién es<br><em>Carlos Martínez?</em></h2>
+      <div class="section-body" data-i18n="quien_body">
+        <p>Carlos Martínez es un guía espiritual nacido en la magia de la Peña de Bernal, el monolito sagrado que ha sido lugar de peregrinación y poder desde tiempos ancestrales.</p>
+        <p>A lo largo de décadas de trabajo interior, ceremonias y retiros, Carlos ha desarrollado una sensibilidad única para percibir y activar los portales energéticos que conectan el mundo visible con lo invisible.</p>
+        <p>Su misión no es enseñar doctrinas ni imponer caminos, sino acompañar a cada persona en su propio despertar.</p>
+      </div>
+      <div class="quien-quote-card">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--c-cream);line-height:1.7;margin-bottom:1rem" data-i18n="quien_quote">
+          "Soy la guía que te ayuda a sanar y el espejo que te muestra tal como eres: completo, luminoso, listo."
+        </p>
+        <p style="font-size:.65rem;letter-spacing:.2em;color:var(--c-gold-dim)">— Carlos Martínez</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── NEWSLETTER BANNER ──────────────────────────────────── -->
+<div class="newsletter-banner">
+  <div class="newsletter-inner">
+
+    <div class="fade-up">
+      <p class="section-label" data-i18n="nl_label">Portal de Mensajes</p>
+      <h2 class="newsletter-title" data-i18n="nl_title">Recibe el llamado<br>cuando <em>el portal se abra</em></h2>
+      <p class="newsletter-sub" data-i18n="nl_sub">
+        Ceremonias, retiros y encuentros en la Peña de Bernal.<br>
+        Sin ruido. Solo lo esencial, cuando sea el momento.
+      </p>
+    </div>
+
+    <div class="fade-up" style="transition-delay:.15s">
+      <form
+        class="newsletter-form"
+        action="https://e4152291.sibforms.com/serve/MUIFANhKKyDHeJyAWMHK5GxmXZY3OeZq2dZIhZQUMmucuUHHAhmDZBVgzuwkq4cN7xrvsY48Q-DiYx8ueq_R4mnoj6Awq185GtaOq_3WPUcrw7XZlOmJUZX1akLCH_N5SHCufU6EwtVTl32pydBWjNZW_L48IRG7hpoDKd3PYst5vONoeEA8gQLVZwIyIvP1kajfT7lcz-YFpqWnzQ=="
+        method="POST"
+        target="_blank"
+        id="newsletterForm"
+      >
+        <input type="hidden" name="locale" value="es" />
+        <input type="hidden" name="html_type" value="simple" />
+
+        <div class="newsletter-fields">
+          <div class="newsletter-fields-row">
+            <input
+              class="newsletter-input"
+              type="text"
+              name="FIRSTNAME"
+              data-i18n-placeholder="nl_name"
+              placeholder="Tu nombre"
+              autocomplete="given-name"
+            />
+            <input
+              class="newsletter-input"
+              type="email"
+              name="EMAIL"
+              data-i18n-placeholder="nl_email"
+              placeholder="Tu correo electrónico"
+              required
+              autocomplete="email"
+            />
+          </div>
+          <button class="newsletter-submit" type="submit" data-i18n="nl_btn">Unirme al Portal</button>
+        </div>
+
+        <p class="newsletter-legal" data-i18n="nl_legal">
+          Al suscribirte aceptas recibir comunicaciones del Guardián de Bernal.
+          Puedes cancelar en cualquier momento.
+        </p>
+      </form>
+      <div class="newsletter-success" id="newsletterSuccess" data-i18n="nl_success">
+        ✦ &nbsp;Gracias. El portal te espera.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── CRÁNEOS SAGRADOS ────────────────────────────────────── -->
+<div id="craneos">
+  <div class="craneos-layout">
+    <div class="craneos-img fade-up">
+      <img
+        src="https://raw.githubusercontent.com/alexitimia-online/guardian/fb779f12db78625239a898bef9737a4b17b474f3/bernal_craneos.png"
+        alt="Cráneos de cristal sagrados con la Peña de Bernal al fondo"
+        loading="lazy"
+      />
+    </div>
+    <div class="craneos-text fade-up" style="transition-delay:.15s">
+      <p class="section-label" data-i18n="craneos_label">Sabiduría Cósmica</p>
+      <h2 class="section-title" data-i18n="craneos_title">Cráneos<br><em>Sagrados</em></h2>
+      <p style="font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--c-gold-dim);margin-bottom:1.5rem" data-i18n="craneos_subtitle">Canales de Conexión</p>
+      <div class="section-body" data-i18n="craneos_body">
+        <p>Los cráneos sagrados de cuarzo forman parte esencial de este camino. No desde lo visible... sino desde lo que se percibe.</p>
+        <p>A través de ellos se abren espacios donde pueden surgir <strong style="color:var(--c-cream)">mensajes, claridad y procesos de sanación profunda</strong>. Cada experiencia revela lo que está listo para mostrarse.</p>
+        <p>Han llegado a manos de Carlos desde diversas fuentes y tradiciones a lo largo de décadas. Cada uno carga una frecuencia única, una memoria específica, una misión particular.</p>
+      </div>
+      <!-- Instagram Reel -->
+      <div style="margin-top:2rem;max-width:320px;">
+        <blockquote class="instagram-media"
+          data-instgrm-captioned
+          data-instgrm-permalink="https://www.instagram.com/reel/DXaFMVKiV94/?utm_source=ig_embed&utm_campaign=loading"
+          data-instgrm-version="14"
+          style="background:var(--c-stone);border:1px solid rgba(201,168,76,.15);border-radius:0;box-shadow:none;margin:0;max-width:100%;padding:0;width:100%;">
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── LA EXPERIENCIA ─────────────────────────────────────── -->
+<section id="experiencia" style="max-width:100%;padding:6rem clamp(1.5rem,6vw,4rem)">
+  <div style="max-width:var(--max-w);margin:0 auto;text-align:center">
+    <p class="section-label" style="justify-content:center;display:flex" data-i18n="exp_label">La Experiencia</p>
+    <h2 class="section-title fade-up" data-i18n="exp_title">¿Qué puedes<br><em>vivir aquí?</em></h2>
+    <p class="section-body fade-up" style="margin:0 auto 3.5rem" data-i18n="exp_body">
+      Cada encuentro es único. El lugar, el momento y la persona crean la alquimia perfecta para lo que necesitas recibir.
+    </p>
+    <div class="exp-grid">
+      <div class="exp-card fade-up">
+        <div class="exp-card-num">01</div>
+        <h3 class="exp-card-title" data-i18n="exp1_title">Activación de Portales</h3>
+        <p data-i18n="exp1_body">Ceremonias energéticas en los puntos de poder de la Peña de Bernal. Una apertura hacia dimensiones más sutiles de tu ser.</p>
+      </div>
+      <div class="exp-card fade-up" style="transition-delay:.1s">
+        <div class="exp-card-num">02</div>
+        <h3 class="exp-card-title" data-i18n="exp2_title">Sanación con Cráneos</h3>
+        <p data-i18n="exp2_body">Sesiones individuales con los cráneos de cristal. Un campo de silencio y presencia donde el alma habla.</p>
+      </div>
+      <div class="exp-card fade-up" style="transition-delay:.2s">
+        <div class="exp-card-num">03</div>
+        <h3 class="exp-card-title" data-i18n="exp3_title">Retiros & Ceremonias</h3>
+        <p data-i18n="exp3_body">Jornadas grupales de reconexión. Meditación, fuego, sonido y la energía viva de la Peña como marco sagrado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ACTIVADOR DE PORTALES ──────────────────────────────── -->
+<div id="activador">
+  <div class="activador-layout">
+    <div class="activador-img fade-up">
+      <img
+        src="https://raw.githubusercontent.com/alexitimia-online/guardian/8c2d8e492b9e8386025439e0f38e6fc4065ecc0d/portales.png"
+        alt="Activación de portales — Carlos Martínez El Guardián"
+        loading="lazy"
+      />
+    </div>
+    <div class="activador-text fade-up" style="transition-delay:.15s">
+      <!-- SVG logo/favicon conservado como ícono decorativo -->
+      <svg class="activador-svg-icon" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Símbolo Activador de Portales">
+        <polygon points="120,14 222,196 18,196" fill="none" stroke="rgba(201,168,76,0.45)" stroke-width="1.2"/>
+        <polygon points="120,44 200,184 40,184" fill="none" stroke="rgba(201,168,76,0.18)" stroke-width="0.8"/>
+        <circle cx="120" cy="146" r="72" fill="none" stroke="rgba(148,0,211,0.28)"  stroke-width="1"/>
+        <circle cx="120" cy="146" r="60" fill="none" stroke="rgba(75,0,160,0.32)"   stroke-width="1"/>
+        <circle cx="120" cy="146" r="49" fill="none" stroke="rgba(30,90,220,0.28)"  stroke-width="1"/>
+        <circle cx="120" cy="146" r="38" fill="none" stroke="rgba(30,160,70,0.32)"  stroke-width="1"/>
+        <circle cx="120" cy="146" r="28" fill="none" stroke="rgba(201,168,76,0.55)" stroke-width="1.2"/>
+        <circle cx="120" cy="146" r="18" fill="none" stroke="rgba(220,110,20,0.42)" stroke-width="1"/>
+        <circle cx="120" cy="146" r="9"  fill="none" stroke="rgba(200,30,30,0.35)"  stroke-width="1"/>
+        <path d="M120,136 L123.5,145 L120,154 L116.5,145 Z M110,146 L119,142.5 L128,146 L119,149.5 Z" fill="rgba(201,168,76,0.85)"/>
+        <circle cx="120" cy="146" r="1.5" fill="rgba(201,168,76,0.9)"/>
+      </svg>
+      <p class="section-label" data-i18n="act_label">Su Práctica</p>
+      <h2 class="section-title" data-i18n="act_title"><em>Activador</em><br>de Portales</h2>
+      <div class="section-body" data-i18n="act_body">
+        <p>Un portal es un umbral de transformación genuina. Carlos ha dedicado su vida a identificar, custodiar y abrir estos espacios para quienes llegan preparados para cruzarlos.</p>
+        <p>El trabajo de activación no requiere creencias previas ni experiencia espiritual. Solo requiere disposición: la voluntad de detenerse, sentir y escuchar lo que su espíritu tiene para decir.</p>
+        <p>La Peña de Bernal no es solo un monolito. Es un ser vivo que lleva siglos aguardando a cada alma que viene a despertar, aún en la distancia.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── EVENTOS ───────────────────────────────────────────── -->
+<div id="eventos">
+  <div class="eventos-inner">
+    <p class="section-label" data-i18n="ev_label">Próximos Encuentros</p>
+    <h2 class="section-title fade-up" data-i18n="ev_title">¿Dónde estará<br><em>El Guardián?</em></h2>
+    <p class="section-body fade-up" style="max-width:560px" data-i18n="ev_sub">Descúbre dónde será la siguiente activación del Guardián, cada activación es única e irrepetible y todas vienen cargadas con la energía de la Peña de Bernal que acompaña a su Guardián.</p>
+    <div class="eventos-grid">
+
+      <div class="evento-card fade-up">
+        <div class="ev-card-bg"><img src="https://raw.githubusercontent.com/alexitimia-online/guardian/98afad7d5b7a7b2134669f8441224cc2608d0eef/chilar-260529-31-AleFeregrino_Pt1.jpeg" alt="Retiro El Chilar Tolimán" loading="lazy"/></div>
+        <div class="ev-card-body">
+          <span class="ev-card-badge" data-i18n="ev_proximo">Próximo</span>
+          <p class="ev-card-fecha">29, 30 y 31 de Mayo · 2026</p>
+          <h3 class="ev-card-nombre"><em>Retiro:</em> Vida,<br>Transformación Consciente</h3>
+          <p class="ev-card-lugar">
+            <strong>El Chilar, Tolimán · Querétaro</strong><br>
+            Crystal Arcoíris - Foco Tonal<br>
+            Recepción: 4:00 – 7:00 pm · Cupo limitado
+          </p>
+          <div class="ev-card-countdown">
+            <span class="ev-card-faltan" data-i18n="ev_faltan">Faltan</span>
+            <span class="ev-card-days" data-target="2026-05-29">—</span>
+            <span class="ev-card-dias" data-i18n="ev_dias">días</span>
+          </div>
+          <div class="ev-card-contactos">
+            <a href="https://wa.me/524421783700?text=Hola%2C%20vi%20el%20Retiro%20%22Vida%2C%20Transformaci%C3%B3n%20Consciente%20%2F%20El%20Chilar%2C%20Tolim%C3%A1n%22%20en%20el%20Portal%20del%20Guardi%C3%A1n%20y%20quiero%20recibir%20informes." class="ev-card-contacto" target="_blank">WA · Guardiana Ale Feregrino</a>
+            <a href="https://wa.me/524421816901?text=Hola%2C%20vi%20el%20Retiro%20%22Vida%2C%20Transformaci%C3%B3n%20Consciente%20%2F%20El%20Chilar%2C%20Tolim%C3%A1n%22%20en%20el%20Portal%20del%20Guardi%C3%A1n%20y%20quiero%20recibir%20informes." class="ev-card-contacto" target="_blank">WA · Alternativo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="evento-card fade-up" style="transition-delay:.07s">
+        <div class="ev-card-bg"><img src="https://raw.githubusercontent.com/alexitimia-online/guardian/c128e624126209461ba69584b6193baef65c27cd/VALLA-260626-28.jpeg" alt="Valladolid" loading="lazy"/></div>
+        <div class="ev-card-body">
+          <p class="ev-card-fecha">26, 27 y 28 de Junio · 2026</p>
+          <h3 class="ev-card-nombre"><em>Reconecta</em> con<br>tu Ser en Yucatán</h3>
+          <p class="ev-card-lugar"><strong>Valladolid, Yucatán</strong> · Posada San Juan</p>
+          <div class="ev-card-countdown">
+            <span class="ev-card-faltan" data-i18n="ev_faltan">Faltan</span>
+            <span class="ev-card-days" data-target="2026-06-26">—</span>
+            <span class="ev-card-dias" data-i18n="ev_dias">días</span>
+          </div>
+          <div class="ev-card-contactos">
+            <a href="https://wa.me/529982424811?text=Hola%2C%20vi%20el%20evento%20%22Reconecta%20con%20tu%20Ser%20%2F%20Valladolid%22%20en%20el%20Portal%20del%20Guardi%C3%A1n%20y%20quiero%20recibir%20informes." onclick="fetch('https://raw.githubusercontent.com/alexitimia-online/guardian/2414c0e82f8509ec9075508556581eb79772a36a/Reconecta_Valladolid_Junio2026.pdf').then(r=>r.blob()).then(b=>{var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='Reconecta_Valladolid_Junio2026.pdf';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)}).catch(()=>window.open('https://raw.githubusercontent.com/alexitimia-online/guardian/2414c0e82f8509ec9075508556581eb79772a36a/Reconecta_Valladolid_Junio2026.pdf','_blank'));" class="ev-card-contacto" target="_blank">WA · Monique Vinay</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="evento-card fade-up" style="transition-delay:.14s">
+        <div class="ev-card-bg"><img src="https://raw.githubusercontent.com/alexitimia-online/guardian/c128e624126209461ba69584b6193baef65c27cd/GDL-260704-05-Blanca.jpg" alt="Guadalajara" loading="lazy"/></div>
+        <div class="ev-card-body">
+          <p class="ev-card-fecha">4 y 5 de Julio · 2026</p>
+          <h3 class="ev-card-nombre">Vida, <em>Transformación</em><br>Consciente</h3>
+          <p class="ev-card-lugar"><strong>Guadalajara, Jalisco</strong></p>
+          <div class="ev-card-countdown">
+            <span class="ev-card-faltan" data-i18n="ev_faltan">Faltan</span>
+            <span class="ev-card-days" data-target="2026-07-04">—</span>
+            <span class="ev-card-dias" data-i18n="ev_dias">días</span>
+          </div>
+          <div class="ev-card-contactos">
+            <a href="https://wa.me/525543437836?text=Hola%2C%20vi%20el%20evento%20%22Vida%2C%20Transformaci%C3%B3n%20Consciente%20%2F%20Guadalajara%22%20en%20el%20Portal%20del%20Guardi%C3%A1n%20y%20quiero%20recibir%20informes." class="ev-card-contacto" target="_blank">WA · Blanca Avila</a>
+            <a href="https://www.instagram.com/blancavila/" class="ev-card-contacto" target="_blank">IG · @blancavila</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="evento-card fade-up" style="transition-delay:.21s">
+        <div class="ev-card-bg"><img src="https://raw.githubusercontent.com/alexitimia-online/guardian/c128e624126209461ba69584b6193baef65c27cd/CDMX-260718-19-Blanca.png" alt="CDMX" loading="lazy"/></div>
+        <div class="ev-card-body">
+          <p class="ev-card-fecha">18 y 19 de Julio · 2026</p>
+          <h3 class="ev-card-nombre">Vida, <em>Transformación</em><br>Consciente</h3>
+          <p class="ev-card-lugar"><strong>Ciudad de México</strong></p>
+          <div class="ev-card-countdown">
+            <span class="ev-card-faltan" data-i18n="ev_faltan">Faltan</span>
+            <span class="ev-card-days" data-target="2026-07-18">—</span>
+            <span class="ev-card-dias" data-i18n="ev_dias">días</span>
+          </div>
+          <div class="ev-card-contactos">
+            <a href="https://wa.me/525543437836?text=Hola%2C%20vi%20el%20evento%20%22Vida%2C%20Transformaci%C3%B3n%20Consciente%20%2F%20CDMX%22%20en%20el%20Portal%20del%20Guardi%C3%A1n%20y%20quiero%20recibir%20informes." class="ev-card-contacto" target="_blank">WA · Blanca Avila</a>
+            <a href="https://www.instagram.com/blancavila/" class="ev-card-contacto" target="_blank">IG · @blancavila</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="evento-card fade-up" style="transition-delay:.28s">
+        <div class="ev-card-bg"><img src="https://raw.githubusercontent.com/alexitimia-online/guardian/8c2d8e492b9e8386025439e0f38e6fc4065ecc0d/portales.png" alt="Portal Niágara" loading="lazy"/></div>
+        <div class="ev-card-body">
+          <p class="ev-card-fecha">6 - 9 Agosto · 2026</p>
+          <h3 class="ev-card-nombre">Portal del León<br><em>Niágara 8 8</em><br><span style="font-size:.8em;color:var(--c-mist);font-style:normal;">Del corazón de Bernal al rugido de Niágara</span></h3>
+          <p class="ev-card-lugar"><strong>Portal Niágara</strong></p>
+          <div class="ev-card-countdown">
+            <span class="ev-card-faltan" data-i18n="ev_faltan">Faltan</span>
+            <span class="ev-card-days" data-target="2026-08-06">—</span>
+            <span class="ev-card-dias" data-i18n="ev_dias">días</span>
+          </div>
+          <div class="ev-card-contactos">
+            <a href="https://wa.me/526271422299?text=Hola%2C%20vi%20el%20evento%20%22Portal%20del%20Le%C3%B3n%20Ni%C3%A1gara%208%208%22%20en%20el%20Portal%20del%20Guardi%C3%A1n%20y%20quiero%20recibir%20informes." class="ev-card-contacto" target="_blank">WA · Nubia Rich</a>
+          </div>
+          <a href="https://portal88.guardiandebernal.com/" target="_blank" rel="noopener"
+             style="display:inline-block;margin-top:1rem;padding:.6rem 1.4rem;
+                    background:var(--c-gold);color:var(--c-bg);
+                    font-family:'Jost',sans-serif;font-size:.65rem;
+                    letter-spacing:.2em;text-transform:uppercase;
+                    text-decoration:none;transition:background .3s;"
+             onmouseover="this.style.background='#e8ddc8'"
+             onmouseout="this.style.background='#c9a84c'"
+             data-i18n="ev_ver_portal">Ver Portal →</a>
+        </div>
+      </div>
+
+      <div class="evento-card fade-up" style="transition-delay:.35s">
+        <div class="ev-card-bg"><img src="https://raw.githubusercontent.com/alexitimia-online/guardian/fb779f12db78625239a898bef9737a4b17b474f3/bernal_guardian.png" alt="Monterrey" loading="lazy"/></div>
+        <div class="ev-card-body">
+          <p class="ev-card-fecha">15 y 16 de Agosto · 2026</p>
+          <h3 class="ev-card-nombre">Vida, <em>Transformación</em><br>Consciente</h3>
+          <p class="ev-card-lugar"><strong>Monterrey, N.L.</strong></p>
+          <div class="ev-card-countdown">
+            <span class="ev-card-faltan" data-i18n="ev_faltan">Faltan</span>
+            <span class="ev-card-days" data-target="2026-08-15">—</span>
+            <span class="ev-card-dias" data-i18n="ev_dias">días</span>
+          </div>
+          <div class="ev-card-contactos">
+            <a href="https://wa.me/525543437836?text=Hola%2C%20vi%20el%20evento%20%22Vida%2C%20Transformaci%C3%B3n%20Consciente%20%2F%20Monterrey%22%20en%20el%20Portal%20del%20Guardi%C3%A1n%20y%20quiero%20recibir%20informes." class="ev-card-contacto" target="_blank">WA · Blanca Avila</a>
+            <a href="https://www.instagram.com/blancavila/" class="ev-card-contacto" target="_blank">IG · @blancavila</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── TESTIMONIOS ────────────────────────────────────────── -->
+<div id="testimonios">
+  <div class="testimonios-header">
+    <p class="section-label" data-i18n="test_label">Voces del Portal</p>
+    <h2 class="section-title fade-up" data-i18n="test_title">Lo que dicen<br><em>quienes lo vivieron</em></h2>
+  </div>
+
+  <div class="testimonios-body">
+
+    <!-- Videos (izquierda) -->
+    <div class="test-videos">
+      <div class="test-video-track">
+
+        <div class="test-video-slide active" data-video="5bM0i-N9-30">
+          <div class="test-video-placeholder">
+            <iframe src="https://www.youtube.com/embed/5bM0i-N9-30?rel=0&modestbranding=1&loop=1&playlist=5bM0i-N9-30"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+            <div class="video-brand-overlay">
+              <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="120,14 222,196 18,196" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="4"/>
+                <circle cx="120" cy="146" r="72" fill="none" stroke="rgba(148,0,211,0.6)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="60" fill="none" stroke="rgba(75,0,160,0.65)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="49" fill="none" stroke="rgba(30,90,220,0.6)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="38" fill="none" stroke="rgba(30,160,70,0.65)" stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="28" fill="none" stroke="rgba(201,168,76,0.9)" stroke-width="4"/>
+                <circle cx="120" cy="146" r="18" fill="none" stroke="rgba(220,110,20,0.7)" stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="9"  fill="none" stroke="rgba(200,30,30,0.6)"  stroke-width="3.5"/>
+                <path d="M120,136 L123.5,145 L120,154 L116.5,145 Z M110,146 L119,142.5 L128,146 L119,149.5 Z" fill="rgba(201,168,76,1)"/>
+              </svg>
+              <span>El Guardián<br>de Bernal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-video-slide" data-video="-ShyTino9OQ">
+          <div class="test-video-placeholder">
+            <iframe src="https://www.youtube.com/embed/-ShyTino9OQ?rel=0&modestbranding=1&loop=1&playlist=-ShyTino9OQ"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+            <div class="video-brand-overlay">
+              <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="120,14 222,196 18,196" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="4"/>
+                <circle cx="120" cy="146" r="72" fill="none" stroke="rgba(148,0,211,0.6)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="60" fill="none" stroke="rgba(75,0,160,0.65)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="49" fill="none" stroke="rgba(30,90,220,0.6)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="38" fill="none" stroke="rgba(30,160,70,0.65)" stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="28" fill="none" stroke="rgba(201,168,76,0.9)" stroke-width="4"/>
+                <circle cx="120" cy="146" r="18" fill="none" stroke="rgba(220,110,20,0.7)" stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="9"  fill="none" stroke="rgba(200,30,30,0.6)"  stroke-width="3.5"/>
+                <path d="M120,136 L123.5,145 L120,154 L116.5,145 Z M110,146 L119,142.5 L128,146 L119,149.5 Z" fill="rgba(201,168,76,1)"/>
+              </svg>
+              <span>El Guardián<br>de Bernal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-video-slide" data-video="oFQXHDFfgLY">
+          <div class="test-video-placeholder">
+            <iframe src="https://www.youtube.com/embed/oFQXHDFfgLY?rel=0&modestbranding=1&loop=1&playlist=oFQXHDFfgLY"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+            <div class="video-brand-overlay">
+              <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="120,14 222,196 18,196" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="4"/>
+                <circle cx="120" cy="146" r="72" fill="none" stroke="rgba(148,0,211,0.6)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="60" fill="none" stroke="rgba(75,0,160,0.65)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="49" fill="none" stroke="rgba(30,90,220,0.6)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="38" fill="none" stroke="rgba(30,160,70,0.65)" stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="28" fill="none" stroke="rgba(201,168,76,0.9)" stroke-width="4"/>
+                <circle cx="120" cy="146" r="18" fill="none" stroke="rgba(220,110,20,0.7)" stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="9"  fill="none" stroke="rgba(200,30,30,0.6)"  stroke-width="3.5"/>
+                <path d="M120,136 L123.5,145 L120,154 L116.5,145 Z M110,146 L119,142.5 L128,146 L119,149.5 Z" fill="rgba(201,168,76,1)"/>
+              </svg>
+              <span>El Guardián<br>de Bernal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-video-slide" data-video="r81icY4Eg4I">
+          <div class="test-video-placeholder">
+            <iframe src="https://www.youtube.com/embed/r81icY4Eg4I?rel=0&modestbranding=1&loop=1&playlist=r81icY4Eg4I"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+            <div class="video-brand-overlay">
+              <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="120,14 222,196 18,196" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="4"/>
+                <circle cx="120" cy="146" r="72" fill="none" stroke="rgba(148,0,211,0.6)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="60" fill="none" stroke="rgba(75,0,160,0.65)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="49" fill="none" stroke="rgba(30,90,220,0.6)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="38" fill="none" stroke="rgba(30,160,70,0.65)" stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="28" fill="none" stroke="rgba(201,168,76,0.9)" stroke-width="4"/>
+                <circle cx="120" cy="146" r="18" fill="none" stroke="rgba(220,110,20,0.7)" stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="9"  fill="none" stroke="rgba(200,30,30,0.6)"  stroke-width="3.5"/>
+                <path d="M120,136 L123.5,145 L120,154 L116.5,145 Z M110,146 L119,142.5 L128,146 L119,149.5 Z" fill="rgba(201,168,76,1)"/>
+              </svg>
+              <span>El Guardián<br>de Bernal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-video-slide" data-video="T4Zl_fWNk9U">
+          <div class="test-video-placeholder">
+            <iframe src="https://www.youtube.com/embed/T4Zl_fWNk9U?rel=0&modestbranding=1&loop=1&playlist=T4Zl_fWNk9U"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+            <div class="video-brand-overlay">
+              <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="120,14 222,196 18,196" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="4"/>
+                <circle cx="120" cy="146" r="72" fill="none" stroke="rgba(148,0,211,0.6)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="60" fill="none" stroke="rgba(75,0,160,0.65)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="49" fill="none" stroke="rgba(30,90,220,0.6)"  stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="38" fill="none" stroke="rgba(30,160,70,0.65)" stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="28" fill="none" stroke="rgba(201,168,76,0.9)" stroke-width="4"/>
+                <circle cx="120" cy="146" r="18" fill="none" stroke="rgba(220,110,20,0.7)" stroke-width="3.5"/>
+                <circle cx="120" cy="146" r="9"  fill="none" stroke="rgba(200,30,30,0.6)"  stroke-width="3.5"/>
+                <path d="M120,136 L123.5,145 L120,154 L116.5,145 Z M110,146 L119,142.5 L128,146 L119,149.5 Z" fill="rgba(201,168,76,1)"/>
+              </svg>
+              <span>El Guardián<br>de Bernal</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="test-video-nav" id="videoNav">
+        <button class="test-video-arrow" onclick="switchVideo(currentVideo - 1)">&#8592;</button>
+        <div class="test-video-dots">
+          <button class="test-video-dot active" onclick="switchVideo(0)"></button>
+          <button class="test-video-dot" onclick="switchVideo(1)"></button>
+          <button class="test-video-dot" onclick="switchVideo(2)"></button>
+          <button class="test-video-dot" onclick="switchVideo(3)"></button>
+          <button class="test-video-dot" onclick="switchVideo(4)"></button>
+        </div>
+        <button class="test-video-arrow" onclick="switchVideo(currentVideo + 1)">&#8594;</button>
+      </div>
+    </div>
+
+    <!-- Testimonios escritos (derecha) -->
+    <div class="test-quotes">
+      <div class="test-quote-track" id="quoteTrack">
+
+        <div class="test-quote-slide active">
+          <p class="test-stars">★★★★★</p>
+          <p class="test-quote-text">
+            Una experiencia que no tiene palabras. Carlos tiene una capacidad única para ver lo que necesitas y abrirte sin que lo pidas. Salí siendo otra persona.
+          </p>
+          <div class="test-author">
+            <div class="test-author-line"></div>
+            <div class="test-author-info">
+              <p class="test-author-name">Ana Lucía R.</p>
+              <p class="test-author-city">Ciudad de México</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-quote-slide">
+          <p class="test-stars">★★★★★</p>
+          <p class="test-quote-text">
+            Fui sin saber qué esperar y regresé con una claridad que llevaba años buscando. La Peña, los cráneos y la presencia de Carlos crean algo que no puedes fabricar.
+          </p>
+          <div class="test-author">
+            <div class="test-author-line"></div>
+            <div class="test-author-info">
+              <p class="test-author-name">Marco A. V.</p>
+              <p class="test-author-city">Guadalajara, Jalisco</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-quote-slide">
+          <p class="test-stars">★★★★★</p>
+          <p class="test-quote-text">
+            Nunca había sentido algo así. Es como si la Peña te hablara a través de él. Volví dos veces y cada vez es completamente distinto y completamente necesario.
+          </p>
+          <div class="test-author">
+            <div class="test-author-line"></div>
+            <div class="test-author-info">
+              <p class="test-author-name">Sofía M.</p>
+              <p class="test-author-city">Monterrey, N.L.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-quote-slide">
+          <p class="test-stars">★★★★★</p>
+          <p class="test-quote-text">
+            Carlos no te da respuestas, te ayuda a encontrar las tuyas. Ese es su verdadero don. Salí del retiro sabiendo exactamente qué hacer con mi vida.
+          </p>
+          <div class="test-author">
+            <div class="test-author-line"></div>
+            <div class="test-author-info">
+              <p class="test-author-name">Rodrigo T.</p>
+              <p class="test-author-city">Valladolid, Yucatán</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end track -->
+
+      <div class="test-quote-nav">
+        <button class="test-arrow" id="quotePrev">&#8592;</button>
+        <div class="test-quote-dots" id="quoteDots"></div>
+        <button class="test-arrow" id="quoteNext">&#8594;</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── CTA ────────────────────────────────────────────────── -->
+<div id="cta" style="background:var(--c-surface);border-top:1px solid rgba(201,168,76,.12);border-bottom:1px solid rgba(201,168,76,.12)">
+  <div class="inner" style="max-width:var(--max-w);margin:0 auto;padding:6rem clamp(1.5rem,6vw,4rem);text-align:center">
+    <p class="section-label" style="justify-content:center;display:flex" data-i18n="cta_label">Iniciar el Camino</p>
+    <h2 class="section-title fade-up" data-i18n="cta_title">¿Sientes el<br><em>llamado?</em></h2>
+    <p class="section-body fade-up" style="margin:0 auto 2.5rem" data-i18n="cta_body">
+      Si llegaste hasta aquí, algo en ti ya tomó la decisión. El siguiente paso es sencillo: ponerte en contacto con Carlos y acordar el momento para tu experiencia en Bernal.
+    </p>
+    <div class="ctas fade-up">
+      <a href="https://wa.me/525566817812" class="btn-primary" data-i18n="cta_wa">Escribir por WhatsApp</a>
+      <a href="mailto:portal@guardiandebernal.com" class="btn-ghost" data-i18n="cta_mail">Enviar un Correo</a>
+    </div>
+    <!-- Download button -->
+    <div class="fade-up" style="margin-top:1.5rem;">
+      <a href="GUARDIAN_INFO_URL_AQUI"
+         download="Como_Contratar_al_Guardian.pdf"
+         id="btnDescarga"
+         style="display:inline-flex;align-items:center;gap:.6rem;
+                padding:.75rem 1.8rem;
+                border:1px solid rgba(201,168,76,.35);
+                color:var(--c-gold);text-decoration:none;
+                font-family:'Jost',sans-serif;font-size:.68rem;
+                letter-spacing:.18em;text-transform:uppercase;
+                transition:all .3s;"
+         onmouseover="this.style.background='rgba(201,168,76,.08)';this.style.borderColor='var(--c-gold)'"
+         onmouseout="this.style.background='transparent';this.style.borderColor='rgba(201,168,76,.35)'"
+         data-i18n="cta_descarga">
+        ↓ Descargar información · Cómo contratar al Guardián
+      </a>
+    </div>
+
+    <!-- Símbolo del Guardián -->
+    <div class="fade-up" style="margin-top:4rem;">
+      <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Símbolo El Guardián"
+        style="width:clamp(140px,20vw,220px);height:auto;opacity:.7;">
+        <polygon points="120,14 222,196 18,196" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="1.2"/>
+        <polygon points="120,44 200,184 40,184" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+        <circle cx="120" cy="146" r="72" fill="none" stroke="rgba(148,0,211,0.5)"   stroke-width="1"/>
+        <circle cx="120" cy="146" r="60" fill="none" stroke="rgba(75,0,160,0.55)"   stroke-width="1"/>
+        <circle cx="120" cy="146" r="49" fill="none" stroke="rgba(30,90,220,0.5)"   stroke-width="1"/>
+        <circle cx="120" cy="146" r="38" fill="none" stroke="rgba(30,160,70,0.55)"  stroke-width="1"/>
+        <circle cx="120" cy="146" r="28" fill="none" stroke="rgba(201,168,76,0.8)"  stroke-width="1.2"/>
+        <circle cx="120" cy="146" r="18" fill="none" stroke="rgba(220,110,20,0.65)" stroke-width="1"/>
+        <circle cx="120" cy="146" r="9"  fill="none" stroke="rgba(200,30,30,0.55)"  stroke-width="1"/>
+        <path d="M120,136 L123.5,145 L120,154 L116.5,145 Z M110,146 L119,142.5 L128,146 L119,149.5 Z" fill="rgba(201,168,76,0.9)"/>
+        <circle cx="120" cy="146" r="1.5" fill="rgba(201,168,76,1)"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer>
+  <span>© 2026 · Carlos Martínez · El Guardián · Peña de Bernal</span>
+  <span style="color:rgba(201,168,76,.3)">guardiandebernal.com</span>
+</footer>
+
+<script>
+  // ── Video switcher ─────────────────────────────────────
+  let currentVideo = 0;
+  const videoSlides = document.querySelectorAll('.test-video-slide');
+  const videoDots = document.querySelectorAll('#videoNav .test-video-dot');
+  function switchVideo(n) {
+    currentVideo = (n + videoSlides.length) % videoSlides.length;
+    videoSlides.forEach((s,i) => s.classList.toggle('active', i === currentVideo));
+    videoDots.forEach((d,i) => d.classList.toggle('active', i === currentVideo));
+  }
+
+  // ── Quote carousel ─────────────────────────────────────
+  const quoteSlides = document.querySelectorAll('.test-quote-slide');
+  const quoteDotsEl = document.getElementById('quoteDots');
+  let currentQuote = 0;
+
+  if (quoteSlides.length && quoteDotsEl) {
+    quoteSlides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'test-quote-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goQuote(i));
+      quoteDotsEl.appendChild(d);
+    });
+
+    function goQuote(n) {
+      quoteSlides[currentQuote].classList.remove('active');
+      currentQuote = (n + quoteSlides.length) % quoteSlides.length;
+      quoteSlides[currentQuote].classList.add('active');
+      quoteDotsEl.querySelectorAll('.test-quote-dot').forEach((d,i) =>
+        d.classList.toggle('active', i === currentQuote));
+    }
+
+    document.getElementById('quotePrev').addEventListener('click', () => goQuote(currentQuote - 1));
+    document.getElementById('quoteNext').addEventListener('click', () => goQuote(currentQuote + 1));
+  }
+
+
+  // ── Days countdown ─────────────────────────────────────
+  document.querySelectorAll('.ev-card-days').forEach(el => {
+    const target = new Date(el.dataset.target + 'T00:00:00');
+    const now = new Date();
+    const days = Math.ceil((target - now) / 86400000);
+    el.textContent = days > 0 ? days : '✦';
+  });
+
+  // ── Newsletter form ────────────────────────────────────
+  const nForm = document.getElementById('newsletterForm');
+  const nSuccess = document.getElementById('newsletterSuccess');
+  if (nForm) {
+    nForm.addEventListener('submit', () => {
+      setTimeout(() => {
+        nForm.style.display = 'none';
+        nSuccess.style.display = 'block';
+      }, 800);
+    });
+  }
+
+  // ── Popup banner ───────────────────────────────────────
+  const popup = document.getElementById('popupOverlay');
+  const popupClose = document.getElementById('popupClose');
+  const popupVerEventos = document.getElementById('popupVerEventos');
+
+  // Countdown
+  const popupTarget = new Date('2026-05-29T00:00:00');
+  const popupDays = Math.ceil((popupTarget - new Date()) / 86400000);
+  const popupDaysEl = document.getElementById('popupDays');
+  if (popupDaysEl) popupDaysEl.textContent = popupDays > 0 ? popupDays : '✦';
+
+  // Show after 3s — always on every visit
+  function closePopup() {
+    popup.classList.remove('visible');
+  }
+  setTimeout(() => popup.classList.add('visible'), 3000);
+  popupClose.addEventListener('click', closePopup);
+  popup.addEventListener('click', e => { if (e.target === popup) closePopup(); });
+  if (popupVerEventos) popupVerEventos.addEventListener('click', closePopup);
+
+  // ── NAV scroll ──────────────────────────────────────────
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Hamburger ──────────────────────────────────────────
+  document.getElementById('hamburger').addEventListener('click', () => {
+    const links = document.querySelector('.nav-links');
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'fixed';
+    links.style.top = '72px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'rgba(13,26,11,.97)';
+    links.style.padding = '2rem';
+    links.style.gap = '1.5rem';
+  });
+
+  // ── Fade-up on scroll ──────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── i18n ───────────────────────────────────────────────
+  const translations = {
+    es: {
+      nav_quien: 'Carlos Martínez',
+      cta_descarga: '↓ Descargar información · Cómo contratar al Guardián',
+      popup_label: 'Próxima Activación',
+      popup_wa: 'Escribir a Guardiana Ale Feregrino',
+      popup_all: 'Ver todos los eventos disponibles →',
+      nav_craneos: 'Cráneos Sagrados',
+      nav_experiencia: 'La Experiencia',
+      nav_activador: 'Activador de Portales',
+      nav_testimonios: 'Testimonios',
+      nav_eventos: 'Eventos',
+      test_label: 'Voces del Portal',
+      test_title: 'Lo que dicen<br><em>quienes lo vivieron</em>',
+      test_video_placeholder: 'Video próximamente',
+      ev_ver_portal: 'Ver Portal →',
+      ev_proximo: 'Próximo',
+      ev_faltan: 'Faltan',
+      ev_dias: 'días',
+      ev_label: 'Próximos Encuentros',
+      ev_title: '¿Dónde estará<br><em>El Guardián?</em>',
+      ev_sub: 'Descúbre dónde será la siguiente activación del Guardián, cada activación es única e irrepetible y todas vienen cargadas con la energía de la Peña de Bernal que acompaña a su Guardián.',
+      ev_vtc_desc: 'Un encuentro para transformar tu vida desde la consciencia',
+      ev_retiro: 'Retiro',
+      ev_pronto: 'Detalles próximamente',
+      ev_reservar: 'Más información →',
+      ev_masinfo: 'Más información →',
+      ev_portal_leon: 'Portal del León',
+      ev_ceremonia: 'Retiro para activar el portal de la abundancia 888 de Niágara',
+      hero_eyebrow: 'Guardián de Peña de Bernal',
+      hero_role: 'Activador de portales, lugares y personas · Sanador de almas',
+      hero_phrase: 'Más que a recordarte lo que ya sabes, viene a activar lo que en ti ya está listo para accionar.',
+      cta_vivir: 'Vivir la Experiencia',
+      cta_conocer: 'Conocer al Guardián',
+      scroll_cue: 'Descender',
+      quote_main: '"Un guía en el camino de regreso. <em>Acompaña a personas que sienten que es momento de hacer una pausa, escuchar su interior y reconectar con lo esencial para alcanzar su siguiente nivel.</em>"<cite>Carlos Martínez · El Guardián · Peña de Bernal</cite>',
+      quien_label: 'El Guardián',
+      quien_title: '¿Quién es<br><em>Carlos Martínez?</em>',
+      quien_body: '<p>Carlos Martínez es un guía espiritual nacido en la magia de la Peña de Bernal, el monolito sagrado que ha sido lugar de peregrinación y poder desde tiempos ancestrales.</p><p>A lo largo de décadas de trabajo interior, ceremonias y retiros, Carlos ha desarrollado una sensibilidad única para percibir y activar los portales energéticos que conectan el mundo visible con lo invisible.</p><p>Su misión no es enseñar doctrinas ni imponer caminos, sino acompañar a cada persona en su propio despertar.</p>',
+      quien_quote: '"Soy la guía que te ayuda a sanar y el espejo que te muestra tal como eres: completo, luminoso, listo."',
+      craneos_label: 'Sabiduría Cósmica',
+      craneos_title: 'Cráneos<br><em>Sagrados</em>',
+      craneos_subtitle: 'Canales de Conexión',
+      craneos_body: '<p>Los cráneos sagrados de cuarzo forman parte esencial de este camino. No desde lo visible... sino desde lo que solo se percibe desde el corazón.</p><p>A través de ellos se abren espacios donde pueden surgir <strong style="color:var(--c-cream)">mensajes, claridad y procesos de sanación profunda</strong>. Cada experiencia revela lo que está listo para mostrarse.</p><p>Han llegado a manos de Carlos desde diversas fuentes y tradiciones a lo largo de décadas. Cada uno carga una frecuencia única, una memoria específica, una misión particular.</p><p style="font-style:italic;color:var(--c-gold)">¿Estás listo para descubrir lo que quieren revelarte?</p>',
+      exp_label: 'La Experiencia',
+      exp_title: '¿Qué puedes<br><em>vivir con el Guardián?</em>',
+      exp_body: 'Cada encuentro es único. El lugar, el momento y la persona crean la alquimia perfecta para lo que necesitas recibir.',
+      exp1_title: 'Activación de Portales',
+      exp1_body: 'Ceremonias energéticas en diversos puntos de poder del planeta. Una apertura hacia dimensiones más sutiles de tu ser.',
+      exp2_title: 'Sanación con Cráneos',
+      exp2_body: 'Sesiones individuales con los cráneos de cristal. Un campo de silencio y presencia donde el alma habla.',
+      exp3_title: 'Retiros & Ceremonias',
+      exp3_body: 'Jornadas grupales de reconexión. Meditación, fuego, sonido y la energía viva de la Peña como marco sagrado aún en la distancia.',
+      act_label: 'Su Práctica',
+      act_title: '<em>Activador</em><br>de Portales',
+      act_body: '<p>Un portal es un umbral de transformación genuina. Carlos ha dedicado su vida a identificar, custodiar y abrir estos espacios para quienes llegan preparados para cruzarlos.</p><p>El trabajo de activación no requiere creencias previas ni experiencia espiritual. Solo requiere disposición: la voluntad de detenerse, sentir y escuchar lo que su espíritu tiene para decir.</p><p>La Peña de Bernal no es solo un monolito. Es un ser vivo que lleva siglos aguardando a cada alma que viene a despertar, aún en la distancia.</p>',
+      cta_label: 'Iniciar el Camino',
+      cta_title: '¿Sientes el<br><em>llamado?</em>',
+      cta_body: 'Si llegaste hasta aquí, algo en ti ya tomó la decisión. El siguiente paso es sencillo: ponerte en contacto con el Guardián y acordar el momento para tu próxima activación.<br><br><em>¡Nos vemos pronto seres cósmicos!</em>',
+      cta_wa: 'Escribir por WhatsApp',
+      cta_mail: 'Enviar un Correo',
+      nl_label: 'Portal de Mensajes',
+      nl_title: 'Recibe el llamado<br><em>de la Peña de Bernal</em>',
+      nl_sub: 'Gotas de sabiduría, ceremonias, retiros y encuentros en la Peña de Bernal y el mundo.',
+      nl_name: 'Tu nombre',
+      nl_email: 'Tu correo electrónico',
+      nl_btn: 'Unirme al Portal',
+      nl_legal: 'Al suscribirte aceptas recibir comunicaciones del Guardián de Bernal. Puedes cancelar en cualquier momento.',
+      nl_success: '✦ &nbsp;Gracias. El portal te espera.',
+    },
+    en: {
+      cta_descarga: '↓ Download info · How to hire the Guardian',
+      popup_label: 'Next Activation',
+      popup_wa: 'Write to Guardiana Ale Feregrino',
+      popup_all: 'See all available events →',
+      popup_wa: 'Write to Guardiana Ale Feregrino',
+      popup_all: 'See all available events →',
+      nav_quien: 'Carlos Martínez',
+      nav_craneos: 'Sacred Skulls',
+      nav_experiencia: 'The Experience',
+      nav_activador: 'Portal Activator',
+      nav_testimonios: 'Testimonials',
+      nav_eventos: 'Events',
+      test_label: 'Voices of the Portal',
+      test_title: 'What those who<br><em>lived it say</em>',
+      test_video_placeholder: 'Video coming soon',
+      ev_ver_portal: 'Visit Portal →',
+      ev_proximo: 'Next',
+      ev_faltan: 'Only',
+      ev_dias: 'days left',
+      ev_label: 'Upcoming Gatherings',
+      ev_title: 'Where will<br><em>The Guardian be?</em>',
+      ev_sub: 'Discover where the Guardian\'s next activation will be — each one is unique and unrepeatable, and all carry the energy of Peña de Bernal that accompanies its Guardian.',
+      ev_vtc_desc: 'A gathering to transform your life through consciousness',
+      ev_retiro: 'Retreat',
+      ev_pronto: 'Details coming soon',
+      ev_reservar: 'More information →',
+      ev_masinfo: 'More information →',
+      ev_portal_leon: 'Lion\'s Gate Portal',
+      ev_ceremonia: 'Retreat to activate the 888 portal of abundance at Niagara',
+      hero_eyebrow: 'Guardian of Peña de Bernal',
+      hero_role: 'Activator of portals, places and people · Soul Healer',
+      hero_phrase: 'More than reminding you of what you already know, he comes to activate what within you is already ready to act.',
+      cta_vivir: 'Live the Experience',
+      cta_conocer: 'Meet the Guardian',
+      scroll_cue: 'Descend',
+      quote_main: '"A guide on the path back home. <em>He accompanies people who feel it is time to pause, listen within, and reconnect with what is essential to reach their next level.</em>"<cite>Carlos Martínez · El Guardián · Peña de Bernal</cite>',
+      quien_label: 'The Guardian',
+      quien_title: 'Who is<br><em>Carlos Martínez?</em>',
+      quien_body: '<p>Carlos Martínez is a spiritual guide born in the magic of Peña de Bernal, the sacred monolith that has been a site of pilgrimage and power since ancestral times.</p><p>Through decades of inner work, ceremonies and retreats, Carlos has developed a unique sensitivity to perceive and activate the energetic portals that connect the visible world with the invisible.</p><p>His mission is not to teach doctrines or impose paths, but to accompany each person in their own awakening.</p>',
+      quien_quote: '"I am the guide who helps you heal and the mirror that shows you as you truly are: whole, luminous, ready."',
+      craneos_label: 'Cosmic Wisdom',
+      craneos_title: 'Sacred<br><em>Skulls</em>',
+      craneos_subtitle: 'Channels of Connection',
+      craneos_body: '<p>The sacred quartz skulls are an essential part of this path. Not from the visible... but from what can only be perceived from the heart.</p><p>Through them, spaces open where <strong style="color:var(--c-cream)">messages, clarity and deep healing processes</strong> can emerge. Each experience reveals what is ready to be shown.</p><p>They have come to Carlos from diverse sources and traditions over decades. Each carries a unique frequency, a specific memory, a particular mission.</p><p style="font-style:italic;color:var(--c-gold)">Are you ready to discover what they want to reveal to you?</p>',
+      exp_label: 'The Experience',
+      exp_title: 'What can you<br><em>live with the Guardian?</em>',
+      exp_body: 'Each encounter is unique. The place, the moment and the person create the perfect alchemy for what you need to receive.',
+      exp1_title: 'Portal Activation',
+      exp1_body: 'Energetic ceremonies at diverse power points across the planet. An opening toward subtler dimensions of your being.',
+      exp2_title: 'Skull Healing Sessions',
+      exp2_body: 'Individual sessions with the crystal skulls. A field of silence and presence where the soul speaks.',
+      exp3_title: 'Retreats & Ceremonies',
+      exp3_body: 'Group days of reconnection. Meditation, fire, sound and the living energy of the Peña as sacred framework — even from a distance.',
+      act_label: 'His Practice',
+      act_title: '<em>Portal</em><br>Activator',
+      act_body: '<p>A portal is a threshold of genuine transformation. Carlos has dedicated his life to identifying, guarding and opening these spaces for those who arrive prepared to cross them.</p><p>Activation work requires no prior beliefs or spiritual experience. It only requires willingness: the desire to stop, feel and listen to what your spirit has to say.</p><p>Peña de Bernal is not just a monolith. It is a living being that has awaited for centuries each soul that comes to awaken — even from a distance.</p>',
+      cta_label: 'Begin the Path',
+      cta_title: 'Do you feel<br><em>the call?</em>',
+      cta_body: 'If you have reached this far, something within you has already made the decision. The next step is simple: contact the Guardian and arrange the moment for your next activation.<br><br><em>See you soon, cosmic beings!</em>',
+      cta_wa: 'Write on WhatsApp',
+      cta_mail: 'Send an Email',
+      nl_label: 'Messages Portal',
+      nl_title: 'Receive the call<br><em>of Peña de Bernal</em>',
+      nl_sub: 'Drops of wisdom, ceremonies, retreats and gatherings at Peña de Bernal and around the world.',
+      nl_name: 'Your name',
+      nl_email: 'Your email address',
+      nl_btn: 'Join the Portal',
+      nl_legal: 'By subscribing you agree to receive communications from El Guardián de Bernal. You can unsubscribe at any time.',
+      nl_success: '✦ &nbsp;Thank you. The portal awaits.',
+    }
+  };
+
+  let currentLang = 'es';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (t[key] !== undefined) el.placeholder = t[key];
+    });
+    document.getElementById('langBtn').textContent = lang === 'es' ? 'EN' : 'ES';
+    document.documentElement.lang = lang;
+  }
+
+  document.getElementById('langBtn').addEventListener('click', () => {
+    applyLang(currentLang === 'es' ? 'en' : 'es');
+  });
+
+  // Apply default language on load
+  applyLang('es');
+</script>
+
+<script async src="//www.instagram.com/embed.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69f2cef1ea2fc91c3337d7d4/1jnllkc7o';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+</body>
+</html>
