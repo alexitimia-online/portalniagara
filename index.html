@@ -494,6 +494,11 @@
   @media(max-width:480px){.cta-num{font-size:clamp(3rem,18vw,5.5rem)}}
 
 
+
+  .btn-stripe{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 50%,var(--gold) 100%);background-size:200% auto;color:var(--deep-navy);font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(.85rem,2vw,1rem);letter-spacing:.08em;text-transform:uppercase;padding:18px 44px;border-radius:50px;border:none;cursor:pointer;text-decoration:none;transition:background-position .4s ease,transform .3s ease,box-shadow .3s ease;box-shadow:0 6px 32px rgba(201,148,58,.5)}
+  .btn-stripe:hover{background-position:right center;transform:translateY(-4px) scale(1.03);box-shadow:0 14px 48px rgba(201,148,58,.65)}
+  .btn-stripe svg{width:18px;height:18px;stroke:var(--deep-navy);fill:none;flex-shrink:0}
+
 </style>
 </head>
 <body>
@@ -572,6 +577,12 @@
   <a href="https://bit.ly/4dWYGKu" target="_blank" rel="noopener noreferrer" class="btn-primary fade-in fade-in-delay-3">
     Sí, siento el llamado — Reservar ahora <span class="arrow">→</span>
   </a>
+  <a href="https://buy.stripe.com/28E00kc9M3ed3JVefQ63K09" target="_blank" rel="noopener noreferrer" class="btn-stripe fade-in fade-in-delay-3" style="margin-top:-8px">
+    <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;stroke:var(--deep-navy);fill:none">
+      <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M7 15h2M12 15h3"/>
+    </svg>
+    Reservar y pagar en línea
+  </a>
   <p class="visa-note fade-in">✦ Requiere <a href="#faq-docs-q">pasaporte vigente y visa americana</a> · Evento en Niagara Falls, EE.UU. / Canadá ✦</p>
   <p class="hero-urgency fade-in">Cupos <span>limitados</span> · Experiencia profunda y transformadora</p>
   <div class="scroll-hint"></div>
@@ -580,7 +591,7 @@
 <section class="llamado">
   <div class="container-narrow">
     <p class="section-label fade-in">✦ El Llamado ✦</p>
-    <h2 class="section-title fade-in">Retiro Espiritual en Niagara:<br><span class="gold italic">¿Sientes que estás lista para más?</span></h2>
+    <h2 class="section-title fade-in">Retiro Espiritual en Niagara:<br><span class="gold italic">¿Sientes que estás listo para más?</span></h2>
     <div class="gold-divider fade-in"><span>✦</span></div>
     <p class="section-body fade-in">Más claridad. Más fuerza. Más abundancia. Más dirección.<br><strong>Esta experiencia es para ti.</strong></p>
     <div class="llamado-quote fade-in">
@@ -708,8 +719,7 @@
         </div>
         <ul class="leyenda-bullets fade-in">
           <li><span class="bullet-icon"><svg class="icon icon-sm"><use href="#ico-vortex"/></svg></span><div id="leyenda-b1">En el corazón de Niagara, el <strong>Whirlpool</strong> concentra ese poder en forma de vórtex: agua girando, fuerza reunida, energía en movimiento.</div></li>
-          <li><span class="bullet-icon"><svg class="icon icon-sm"><use href="#ico-sirius"/></svg></span><div id="leyenda-b2">La alineación planetaria con <strong>Sirio</strong>, estrella vinculada al linaje leonino Urmah, convierte a Niágara en un punto focal de activación: la garganta viva donde el rugido del agua abre el Portal del León.</div></li>
-          <li><span class="bullet-icon"><svg class="icon icon-sm"><use href="#ico-bolt"/></svg></span><div id="leyenda-b3">Los <strong>Thunderers</strong>, guardianes ancestrales del trueno y el agua, acompañan este llamado desde tiempos antiguos.</div></li>
+          <li><span class="bullet-icon"><svg class="icon icon-sm"><use href="#ico-sirius"/></svg></span><div id="leyenda-b2">La alineación planetaria con <strong>Sirio</strong> convierte a Niágara en un punto focal de activación: la garganta viva donde el rugido del agua abre el Portal del León.</div></li>
           <li><span class="bullet-icon"><svg class="icon icon-sm"><use href="#ico-globe"/></svg></span><div id="leyenda-b4">Visitaremos los principales puntos en ambos lados de Niagara: <strong>Canadá y Estados Unidos.</strong></div></li>
         </ul>
       </div>
@@ -723,8 +733,6 @@
         </div>
         <div class="beings fade-in">
           <div class="being-badge"><div class="being-icon"><svg class="icon"><use href="#ico-sirius"/></svg></div><strong>Sirio</strong><span id="being1">Conexión sagrada</span></div>
-          <div class="being-badge"><div class="being-icon"><svg class="icon"><use href="#ico-lion"/></svg></div><strong>Urmah</strong><span id="being2">Linaje leonino</span></div>
-          <div class="being-badge"><div class="being-icon"><svg class="icon"><use href="#ico-bolt"/></svg></div><strong>Thunderers</strong><span id="being3">Guardianes del agua</span></div>
         </div>
       </div>
     </div>
@@ -928,6 +936,14 @@
     </div>
     <div class="cta-actions fade-in">
       <a href="https://bit.ly/4dWYGKu" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:1.05rem;padding:20px 48px">Sí, siento el llamado — Reservar ahora <span class="arrow">→</span></a>
+<a href="https://buy.stripe.com/28E00kc9M3ed3JVefQ63K09" target="_blank" rel="noopener noreferrer" class="btn-stripe" id="stripe-btn">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="5" width="20" height="14" rx="2"/>
+          <path d="M2 10h20"/>
+          <path d="M7 15h2M12 15h3"/>
+        </svg>
+        Reservar y pagar en línea
+      </a>
       <a href="https://bit.ly/4dWYGKu" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><use href="#ico-wa"/></svg>
         Escribir a Nubia por WhatsApp
@@ -1037,7 +1053,7 @@ const LANG = {
     'hero-urg':   'Cupos <span style="color:var(--gold);font-weight:600">limitados</span> · Experiencia profunda y transformadora',
     /* LLAMADO */
     'llamado-lbl':    '✦ El Llamado ✦',
-    'llamado-h2':     'Retiro Espiritual en Niagara:<br><span class="gold italic">¿Sientes que estás lista para más?</span>',
+    'llamado-h2':     'Retiro Espiritual en Niagara:<br><span class="gold italic">¿Sientes que estás listo para más?</span>',
     'llamado-body1':  'Más claridad. Más fuerza. Más abundancia. Más dirección.<br><strong>Esta experiencia es para ti.</strong>',
     'llamado-quote':  '"Del 6 al 9 de agosto de 2026, el Portal del León Niagara 8·8 se abre como una experiencia iniciática para <strong>desbloquear tu energía, purificar emociones, resetear el cuerpo físico</strong> y cruzar hacia tu siguiente nivel."',
     'llamado-body2':  'Esta travesía reúne los elementos más poderosos para tu transformación.<br>Cada pieza fue elegida con intención. Cada momento, diseñado para activarte.',
@@ -1054,8 +1070,8 @@ const LANG = {
     'leyenda-p1':  'Niagara es uno de ellos. Durante siglos, su agua ha caído con una fuerza que <strong>limpia, despierta y mueve emociones profundas.</strong>',
     'leyenda-p2':  'El Portal del León Niagara 8·8 abre una fecha simbólica única. Una ventana para recibir una frecuencia de <strong>abundancia, fuerza y renovación</strong> que invita a iniciar el ciclo con decisión.',
     'leyenda-b1':  'En el corazón de Niagara, el <strong>Whirlpool</strong> concentra ese poder en forma de vórtex: agua girando, fuerza reunida, energía en movimiento.',
-    'leyenda-b2':  'La alineación planetaria con <strong>Sirio</strong>, estrella vinculada al linaje leonino Urmah, convierte a Niágara en un punto focal de activación: la garganta viva donde el rugido del agua abre el Portal del León.',
-    'leyenda-b3':  'Los <strong>Thunderers</strong>, guardianes ancestrales del trueno y el agua, acompañan este llamado desde tiempos antiguos.',
+    'leyenda-b2':  'La alineación planetaria con <strong>Sirio</strong> convierte a Niágara en un punto focal de activación: la garganta viva donde el rugido del agua abre el Portal del León.',
+    'leyenda-b3':  '',
     'leyenda-b4':  'Visitaremos los principales puntos en ambos lados de Niagara: <strong>Canadá y Estados Unidos.</strong>',
     'leyenda-num-lbl': 'Portal del León · Año 1',
     'leyenda-num-p1': 'El número 8 representa poder, manifestación y abundancia infinita. El 8/8 es el punto máximo de activación energética del año.',
@@ -1142,6 +1158,7 @@ const LANG = {
     'bonus-p':   'Quedan muy pocos cupos. Reserva <strong>antes del 30 de junio</strong> y recibe herramientas exclusivas de activación para potenciar tu experiencia previo a nuestro encuentro.',
     'cta-btn':   'Sí, siento el llamado — Reservar ahora',
     'wa-btn':    'Escribir a Nubia por WhatsApp',
+    'stripe-btn':'Reservar y pagar en línea',
     'contact':   'Informes: <strong>Nubia Rich</strong> · +52 627 142 2299',
     'cupo':      'Cupo limitado — Experiencia profunda y transformadora',
     /* FOOTER */
@@ -1180,8 +1197,8 @@ const LANG = {
     'leyenda-p1':  'Niagara is one of them. For centuries, its water has fallen with a force that <strong>cleanses, awakens and moves deep emotions.</strong>',
     'leyenda-p2':  'The Portal of the Lion Niagara 8·8 opens a unique symbolic date. A window to receive a frequency of <strong>abundance, strength and renewal</strong> that invites beginning the cycle with intention.',
     'leyenda-b1':  'At the heart of Niagara, the <strong>Whirlpool</strong> concentrates that power as a vortex: spinning water, gathered force, energy in motion.',
-    'leyenda-b2':  'The planetary alignment with <strong>Sirius</strong>, star linked to the Urmah leonine lineage, makes Niagara a focal point of activation: the living throat where the roar of water opens the Portal of the Lion.',
-    'leyenda-b3':  'The <strong>Thunderers</strong>, ancestral guardians of thunder and water, have accompanied this calling since ancient times.',
+    'leyenda-b2':  'The planetary alignment with <strong>Sirius</strong> makes Niagara a focal point of activation: the living throat where the roar of water opens the Portal of the Lion.',
+    'leyenda-b3':  '',
     'leyenda-b4':  'We will visit the main points on both sides of Niagara: <strong>Canada and the United States.</strong>',
     'leyenda-num-lbl': 'Portal of the Lion · Year 1',
     'leyenda-num-p1': 'The number 8 represents power, manifestation and infinite abundance. 8/8 is the peak energetic activation point of the year.',
@@ -1268,6 +1285,7 @@ const LANG = {
     'bonus-p':   'Very few spots remain. Reserve <strong>before June 30</strong> and receive exclusive activation tools to enhance your experience before our gathering.',
     'cta-btn':   'Yes, I feel the calling — Reserve now',
     'wa-btn':    'Message Nubia on WhatsApp',
+    'stripe-btn':'Reserve and pay online',
     'contact':   'Info: <strong>Nubia Rich</strong> · +52 627 142 2299',
     'cupo':      'Limited spots — Deep & transformative experience',
     /* FOOTER */
